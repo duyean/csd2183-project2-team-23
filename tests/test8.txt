@@ -1,0 +1,9 @@
+#test8.txt
+#Description: Verifies that half-open event intervals [a, b) and [b, c) are treated as non-overlapping and that both most and best print selected event IDs in ascending numerical order.
+#Intended Result: most outputs most 3 0 1 2; best outputs best 22 0 1 2.
+N 1 0
+E 5 10 2
+E 0 5 10
+E 10 15 10
+most
+best

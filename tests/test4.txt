@@ -1,0 +1,9 @@
+#test4.txt
+#Description: Verifies that stamina finds a lower total cost via a more expensive initial sea route that leads into a negative-cost sea route, rather than committing to a locally cheaper prefix.
+#Intended Result: stamina 0 3 outputs cost 8 along path 0 2 1 3 (beating 0 1 3 of cost 12).
+N 4 0
+R 0 1 2
+R 1 3 10
+R 0 2 6
+R 2 1 -8
+stamina 0 3

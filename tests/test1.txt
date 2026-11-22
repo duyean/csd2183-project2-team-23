@@ -1,0 +1,10 @@
+#test1.txt
+#Description: Verifies that sea routes connecting islands across separate bridge components do not merge bridge regions or count as valid bridge hops.
+#Intended Result: regions outputs 2 regions (0 1 and 2 3); hops 0 2 and hops 0 3 both output unreachable.
+N 4 0
+B 0 1 2
+B 2 3 2
+R 1 2 -5
+regions
+hops 0 2
+hops 0 3

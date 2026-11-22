@@ -1,0 +1,16 @@
+#test10.txt
+#Description: Verifies that a subsequent N command completely resets bridges, sea routes, quests, prerequisites, and events so no stale data leaks from an earlier world.
+#Intended Result: After the second N command, regions outputs 1 region (0 1), fastest 0 1 outputs 7 0 1, stamina 0 1 outputs unreachable, and best outputs 0.
+N 3 2
+B 0 1 5
+R 0 2 -100
+R 2 0 50
+Q 0 99
+P 0 1
+E 0 10 500
+N 2 0
+B 0 1 7
+regions
+fastest 0 1
+stamina 0 1
+best

@@ -1,0 +1,10 @@
+#test3.txt
+#Description: Verifies that both MST algorithms correctly break cycles when multiple bridges share identical lengths.
+#Intended Result: Both maintain kruskal and maintain prim output total length 15 with 3 bridges (3 bridges of length 5 forming a spanning tree of all 4 islands).
+N 4 0
+B 0 1 5
+B 1 2 5
+B 2 0 5
+B 2 3 5
+maintain kruskal
+maintain prim

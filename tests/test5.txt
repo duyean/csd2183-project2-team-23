@@ -1,0 +1,12 @@
+#test5.txt
+#Description: Verifies that stamina reports exploit when a negative-cost cycle is reachable from s even if the cycle does not lie on any path to t, while ignoring negative cycles unreachable from s.
+#Intended Result: stamina 0 2 outputs exploit followed by the negative cycle (3 4 3 or 4 3 4); stamina 5 6 outputs cost 3 along path 5 6 without triggering exploit.
+N 7 0
+R 0 1 1
+R 1 2 1
+R 1 3 2
+R 3 4 -5
+R 4 3 1
+R 5 6 3
+stamina 0 2
+stamina 5 6

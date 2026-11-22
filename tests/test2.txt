@@ -1,0 +1,9 @@
+#test2.txt
+#Description: Verifies that maintain prim restarts across disconnected bridge components to produce a complete minimum spanning forest matching maintain kruskal.
+#Intended Result: Both maintain prim and maintain kruskal output total length 9 with 3 bridges (0 1 3, 1 2 4, and 3 4 2).
+N 5 0
+B 0 1 3
+B 1 2 4
+B 3 4 2
+maintain prim
+maintain kruskal

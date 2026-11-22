@@ -1,0 +1,13 @@
+#test6.txt
+#Description: Verifies that unlock detects and reports a prerequisite cycle anywhere in the quest graph, even when the queried quest q has no prerequisites and does not depend on the cycle.
+#Intended Result: unlock 0 outputs unlock 0 cycle.
+N 4 5
+Q 0 2
+Q 1 3
+Q 2 4
+Q 3 1
+Q 4 5
+P 0 1
+P 2 3
+P 3 2
+unlock 0

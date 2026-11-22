@@ -1,0 +1,17 @@
+#test9.txt
+#Description: Verifies that sums of maximum bridge lengths, sea route costs, quest durations, event rewards, and large event timestamps do not overflow 32-bit integers.
+#Intended Result: fastest 0 2 outputs 2000000000 0 1 2; stamina 0 2 outputs 2000000000 0 1 2; unlock 1 outputs 2000000000 0 1; best outputs 2000000000 0 1.
+N 3 3
+B 0 1 1000000000
+B 1 2 1000000000
+R 0 1 1000000000
+R 1 2 1000000000
+Q 0 1000000000
+Q 1 1000000000
+P 0 1
+E 0 1000000000000 1000000000
+E 1000000000000 1000000000001 1000000000
+fastest 0 2
+stamina 0 2
+unlock 1
+best
