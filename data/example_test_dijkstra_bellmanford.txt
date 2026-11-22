@@ -1,0 +1,13 @@
+N 6 4
+B 0 1 4
+B 1 2 3
+B 0 2 6
+B 3 4 2
+R 0 1 5
+R 1 2 -2
+R 0 2 4
+R 2 3 1
+fastest 0 2
+fastest 2 0
+fastest 0 5
+stamina 0 3
