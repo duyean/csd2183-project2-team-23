@@ -1,23 +1,66 @@
-// Your disjoint-set forest. Every member function below is a stub that
-// compiles but does nothing useful yet; replace each one with your
-// implementation.
+// Disjoint-set forest with union by rank and path compression
+// (Cormen et al., Section 19.3).
 
 #include "disjoint_set.h"
 
-DisjointSet::DisjointSet(int /*n*/) {
-  // TODO: Make every element the root of its own tree, with rank 0.
+#include <utility>
 
-  // This line only silences a compiler warning about an unused member.
-  // Delete it once your code uses rank_.
-  (void)rank_;
+DisjointSet::DisjointSet(int n) : parent_(n), rank_(n, 0), count_(n) {
+  //Every element starts as the root of its own one-node tree.
+
+  for (int i = 0; i < n; ++i) 
+  {
+    parent_[i] = i;
+  }
+  
 }
 
 int DisjointSet::find(int x) {
-  return x;  // TODO
+  // First pass
+  int root = x;
+
+  while (parent_[root] != root) 
+  {
+    root = parent_[root];
+  }
+
+  //Second pass
+  while (parent_[x] != root) 
+  {
+    int next = parent_[x];
+    parent_[x] = root;
+    x = next;
+  }
+
+  return root;
 }
 
-bool DisjointSet::unite(int /*x*/, int /*y*/) {
-  return false;  // TODO
+bool DisjointSet::unite(int x, int y) {
+
+  int rx = find(x);
+  int ry = find(y);
+
+  if (rx == ry) 
+  {
+    return false;
+  }
+
+  //Attach the root of lower rank below the root of higher
+  if (rank_[rx] < rank_[ry]) 
+  {
+    std::swap(rx, ry);
+  }
+
+  parent_[ry] = rx;
+
+  if (rank_[rx] == rank_[ry]) 
+  {
+    ++rank_[rx];
+  }
+
+  --count_;
+  return true;
+
 }
 
 int DisjointSet::count() const {
