@@ -53,6 +53,73 @@ SpanningForest kruskal(int n, const std::vector<Edge> &bridges) {
   return forest;
 }
 
-SpanningForest prim(int /*n*/, const std::vector<Edge> & /*bridges*/) {
-  return {};  // TODO
+SpanningForest prim(int n, const std::vector<Edge> & bridges) {
+  
+  SpanningForest forest;
+  const int m = static_cast<int>(bridges.size());
+
+  //Adjacency list in compressed (CSR) form
+  //x are adj[start[x]] .. adj[start[x + 1] - 1], stored as bridge indicess
+  std::vector<int> start(static_cast<std::size_t>(n) + 1, 0);
+  for (const Edge &e : bridges)
+  {
+    ++start[e.from + 1];
+    ++start[e.to + 1];
+  }
+
+  for (int x = 0; x < n; ++x) 
+  {
+    start[x + 1] += start[x];
+  }
+
+  std::vector<int> adj(2 * static_cast<std::size_t>(m));
+  std::vector<int> next(start.begin(), start.end() - 1);
+
+
+  for (int i = 0; i < m; ++i) 
+  {
+    adj[next[bridges[i].from]++] = i;
+    adj[next[bridges[i].to]++] = i;
+  }
+
+  //Heap entry: (length, bridge index, island it leads to). Min-heap order
+  //by length, then bridge index
+  using Entry = std::tuple<std::int64_t, int, int>;
+  std::priority_queue<Entry, std::vector<Entry>, std::greater<Entry>> heap;
+  std::vector<char> in_tree(n, 0);
+
+  auto add_island = [&](int x) 
+  {
+    in_tree[x] = 1;
+    for (int k = start[x]; k < start[x + 1]; ++k)
+    {
+
+      const Edge &e = bridges[adj[k]];
+
+      int other = e.from == x ? e.to : e.from;
+
+      if (!in_tree[other]) heap.emplace(e.weight, adj[k], other);
+
+    }
+  };
+
+  // Restart in every region: each island not yet reached roots a new tree.
+  for (int root = 0; root < n; ++root) 
+  {
+    if (in_tree[root]) continue;
+
+    add_island(root);
+
+
+    while (!heap.empty()) 
+    {
+      auto [length, i, x] = heap.top();
+      heap.pop();
+      if (in_tree[x]) continue;  // Stale
+      forest.total_length += length;
+      forest.edges.push_back(bridges[i]);
+      add_island(x);
+    }
+  }
+  return forest;
 }
