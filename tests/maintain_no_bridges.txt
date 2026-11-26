@@ -1,0 +1,16 @@
+# Maintenance with zero bridges: one island, then many islands, must give
+# "maintain 0 0" with no bridge lines. The third world checks that a new N
+# discards earlier bridges, so they do not leak into the next forest.
+N 1 0
+maintain kruskal
+maintain prim
+N 6 0
+maintain kruskal
+maintain prim
+N 4 0
+B 0 1 7
+B 2 3 8
+N 4 0
+B 1 2 3
+maintain kruskal
+maintain prim

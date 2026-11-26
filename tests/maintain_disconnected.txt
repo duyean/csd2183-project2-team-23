@@ -1,0 +1,15 @@
+# Maintenance on a disconnected network. Island 0 is isolated, so a prim that
+# only grows one tree from island 0 (instead of restarting in every region)
+# outputs no bridges at all. Regions {1,2,3}, {4,5,6,7} and {8} need 2 + 3 + 0
+# bridges, total 2 + 3 + 6 = 11. Both algorithms must agree.
+N 9 0
+B 1 2 5
+B 2 3 1
+B 1 3 1
+B 4 5 1
+B 5 6 2
+B 6 7 3
+B 4 7 9
+B 5 7 4
+maintain kruskal
+maintain prim

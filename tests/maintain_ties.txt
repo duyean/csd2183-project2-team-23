@@ -1,0 +1,26 @@
+# Many minimum spanning forests of equal total length: K5 where every bridge
+# has length 2, plus length-0 bridges and bridges at the 10^9 limit. Any
+# answer is fine, but it must have 4 bridges, no cycle, and total 8 (then
+# 10^9 for the second world). Catches tie-breaking that drops or duplicates
+# bridges, and mishandled zero lengths.
+N 5 0
+B 0 1 2
+B 0 2 2
+B 0 3 2
+B 0 4 2
+B 1 2 2
+B 1 3 2
+B 1 4 2
+B 2 3 2
+B 2 4 2
+B 3 4 2
+maintain kruskal
+maintain prim
+N 4 0
+B 0 1 0
+B 1 2 0
+B 2 0 0
+B 2 3 1000000000
+B 0 3 1000000000
+maintain kruskal
+maintain prim
