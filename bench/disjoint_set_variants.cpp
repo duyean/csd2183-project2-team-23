@@ -292,11 +292,11 @@ int main(int argc, char **argv)
   {
     inputs.push_back(random_graph(1 << k, rng));
   }
-  for (const int k : {10, 11, 12, 13, 14, 15}) 
+  for (const int k : {10, 11, 12, 13}) 
   {
     inputs.push_back(chain_graph(1 << k, rng));
   }
-  for (const int k : {12, 14, 16, 18}) 
+  for (const int k : {10, 12, 14, 16}) 
   {
     inputs.push_back(binomial_graph(k, rng));
   }
