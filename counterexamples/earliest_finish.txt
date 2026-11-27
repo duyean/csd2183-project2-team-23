@@ -1,0 +1,5 @@
+# Earliest-finish rule fails: it takes [0,2) for 1 and blocks [1,3) worth 100.
+N 1 0
+E 0 2 1
+E 1 3 100
+best

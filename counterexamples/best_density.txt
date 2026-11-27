@@ -1,0 +1,5 @@
+# Reward-per-unit-time rule fails: [0,1) has density 2 and blocks [0,10) with density 1 but reward 10.
+N 1 0
+E 0 1 2
+E 0 10 10
+best
