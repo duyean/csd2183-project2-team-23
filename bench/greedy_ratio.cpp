@@ -12,7 +12,7 @@
 
 using i64 = std::int64_t;
 
-enum class Rule{ LargestReward, EarlierFinish, BestDensity };
+enum class Rule{ LargestReward, EarliestFinish, BestDensity };
 
 static i64 greedy_reward(const std::vector<Event> &ev, Rule rule){
     const int n = static_cast<int>(ev.size());
@@ -54,8 +54,8 @@ static i64 total_reward(const std::vector<Event> &ev, const std::vector<int> &id
     i64 s = 0;
     for (int i : idx){
         s += ev[i].reward;
-        return s;
     }
+    return s;
 }
 
 static std::vector<Event> make_instance(int n, bool linked, std::mt19937_64 &rng){
@@ -74,7 +74,7 @@ static std::vector<Event> make_instance(int n, bool linked, std::mt19937_64 &rng
 int main(){
     const std::vector<int> sizes = {10, 100, 1000};
     const int trials = 1000;
-    const char *names[3] = {"largest_-reward", "earliest-finish", "best-density"};
+    const char *names[3] = {"largest-reward", "earliest-finish", "best-density"};
     std::mt19937_64 rng(2183);
 
     std::cout << "model,n,rule,mean_ratio,min_ratio\n" << std::fixed << std::setprecision(4);
@@ -83,7 +83,7 @@ int main(){
             double sum[3] = {0, 0, 0}, mn[3] = {1, 1, 1};
             for (int t = 0; t < trials; ++t){
                 auto ev = make_instance(n, linked, rng);
-                const double opt = static_cast<double>(total_rewards(ev, best_events(ev)));
+                const double opt = static_cast<double>(total_reward(ev, best_events(ev)));
                 for (int r = 0; r < 3; ++r){
                     double ratio = greedy_reward(ev, static_cast<Rule>(r)) / opt;
                     sum[r] += ratio;
